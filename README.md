@@ -46,13 +46,19 @@
   ```
 
 ### 서버 실행 
-
   ```bash
   cd imageserver
-  PORT=10000 ./run.sh ~/dir/to/be/sent
+  PORT=10000 ./run.sh ~/path/to/bongeunsa_image or ~/path/to/etri_image
   ```
   
 ### 클라이언트 실행
+  - 인터페이스
+    - Panorama: http://ip.address.to.image.server:port/streetview_id
+    - Cubic: ttp://ip.address.to.image.server:port/streetview_id/{face}
+  - Example
+    ```
+    curl http://ip.address.to.image.server:port/29300503300 --output test.jpg
+    ```
 
 # 관련 문의
 - 이동환: donghwan.lee@naverlabs.com
