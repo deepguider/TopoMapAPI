@@ -59,7 +59,10 @@
     ```
     curl http://ip.address.to.image.server:port/29300503300 --output test.jpg
     ```
-
+# Visualization
+ - geojson.io 에 접속후 geojson 파일을 드래그 & 드롭
+ - geojson.io 의 기본 지도가 네이버지도가 아니므로 다소 어긋나 보일 수는 있음
+ 
 # 관련 문의
 - 이동환: donghwan.lee@naverlabs.com
 - 김덕화: deokhwa.kim@naverlabs.com
