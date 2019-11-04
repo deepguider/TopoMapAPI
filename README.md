@@ -30,7 +30,7 @@
 
 2. 클라이언트 실행
     ```bash
-    python client.py <layer> <request_type>
+    python topomap_client.py <layer> <request_type>
     ```
     
     - layer: routing, poi, or streetview
