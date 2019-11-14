@@ -48,6 +48,7 @@
 ### 서버 실행 
   ```bash
   cd imageserver
+  docker load -i imageserver.tar
   PORT=10000 ./run.sh ~/path/to/bongeunsa_image or ~/path/to/etri_image
   ```
   
