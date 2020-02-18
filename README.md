@@ -1,18 +1,13 @@
 # Topological Map Server & Client
 ### 다운로드 및 압축 해제
   - 이메일에 제공된 링크로부터 Topological Map server docker 이미지 파일을 다운로드 받음 (topomapserver_package.tar)
-  - 아래의 커맨드를 실행하여 압축 해제
-  ```bash
-  mkdir -p topomapserver && cd topomapserver
-  tar xf topomapserver_package.tar
-  ```
-  
+ 
 ### Server 실행
   - 아래의 서버 실행시 Topological Map을 구성하는 세 가지 layer를 다운로드할 수 있는 서버가 동시에 실행 됨
   
-  ```bash
-  docker load -i topomapserver.tar
-  docker-compose up
+   ```bash
+  docker load -i routingapi_server.tar
+  docker-compose -f naver_api_docker_compose.yml up
   ```
   
 ### 인터페이스
@@ -35,6 +30,31 @@
     
     - layer: routing, poi, or streetview
     - request_type: tile, wgs, or node
+
+# Routing server & Client
+### 다운로드 및 압축 해제
+  - 이메일에 제공된 링크로부터 docker 이미지 파일을 다운로드 받음 (routingapi_server.tar)
+
+### 서버 실행 
+  ```bash
+  docker load -i routingapi_server.tar
+  docker-compose -f naver_api_docker_compose.yml up
+  ```
+  
+### 인터페이스
+    - http://path.to.server/start_lat/start_lon/goal_lat/goal_lon/num_paths
+
+### Client 샘플 코드
+1. routing_client.py 수정
+    - "localhost" 를 서버의 ip address로 변경
+    - Port number는 바꾸지 말 것
+
+2. 클라이언트 실행
+    ```bash
+    python routing_client.py 
+    ```
+    - 예제 1: ETRI 및 봉은사 지역 시작점->도착점
+    - 예제 2: ETRI 지역 시작점->경유지->도착점
 
 # Image download server & Client
 ### 다운로드 및 압축 해제
@@ -60,6 +80,7 @@
     ```
     curl http://ip.address.to.image.server:port/29300503300 --output test.jpg
     ```
+
 # Visualization
  - geojson.io 에 접속후 geojson 파일을 드래그 & 드롭
  - geojson.io 의 기본 지도가 네이버지도가 아니므로 다소 어긋나 보일 수는 있음
