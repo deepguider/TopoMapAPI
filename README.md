@@ -2,10 +2,11 @@
 ### 다운로드 및 압축 해제
   - 이메일에 제공된 링크로부터 Topological Map server docker 이미지 파일을 다운로드 받음 (topomapserver_package.tar)
  
-### Server 실행
+### Server 실행 (Topological map API와 Routing API 가 동시에 실행됨)
   - 아래의 서버 실행시 Topological Map을 구성하는 세 가지 layer를 다운로드할 수 있는 서버가 동시에 실행 됨
   
    ```bash
+  docker load -i topomapserver.tar
   docker load -i routingapi_server.tar
   docker-compose -f naver_api_docker_compose.yml up
   ```
@@ -35,8 +36,9 @@
 ### 다운로드 및 압축 해제
   - 이메일에 제공된 링크로부터 docker 이미지 파일을 다운로드 받음 (routingapi_server.tar)
 
-### 서버 실행 
+### 서버 실행 (Topological map API와 Routing API 가 동시에 실행됨)
   ```bash
+  docker load -i topomapserver.tar
   docker load -i routingapi_server.tar
   docker-compose -f naver_api_docker_compose.yml up
   ```
