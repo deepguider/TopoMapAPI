@@ -5,7 +5,8 @@
 ### Server 실행 (Topological map API와 Routing API 가 동시에 실행됨)
   - 아래의 서버 실행시 Topological Map을 구성하는 세 가지 layer를 다운로드할 수 있는 서버가 동시에 실행 됨
   
-   ```bash
+  ```bash
+  tar xjf server_*.tar.bz2
   docker load -i topomapserver.tar
   docker load -i routingapi_server.tar
   docker-compose -f naver_api_docker_compose.yml up
@@ -86,7 +87,8 @@
 # Visualization
  - geojson.io 에 접속후 geojson 파일을 드래그 & 드롭
  - geojson.io 의 기본 지도가 네이버지도가 아니므로 다소 어긋나 보일 수는 있음
- 
+ - QGIS:
+    - link: https://www.qgis.org/ko/site/
 # 관련 문의
 - 이동환: donghwan.lee@naverlabs.com
 - 김덕화: deokhwa.kim@naverlabs.com
