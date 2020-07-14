@@ -21,6 +21,14 @@ def query_to_server(url, req):
     outputs = response.json()
     return outputs
 
+def modify_edge(url, req):
+    req_str = url + '{}/{}'.format(req['cmd'],req['edge_num'])
+    response = requests.get(req_str)
+    response.raise_for_status()
+    elapsed_time = response.elapsed.total_seconds()
+    outputs = response.json()
+    return outputs
+
 def merge_routes(routes):
     route_all = []
     ids = []
@@ -42,13 +50,16 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Topological Map Client")
     args = parser.parse_args()
 
-    ##Example 1: Start -> Goal
-    req = {'start_lon': 127.367541, 'start_lat': 36.383912, 'goal_lon': 127.378538, 'goal_lat': 36.379558, 'num_paths':2} # ETRI
+    '''
+    ## Example 1: Start -> Goal
+    req = {'start_lon': 127.367433, 'start_lat': 36.382423, 'goal_lon': 127.378857, 'goal_lat': 36.379444, 'num_paths':2} # ETRI
+    #req = {'start_lon': 127.367541, 'start_lat': 36.383912, 'goal_lon': 127.378538, 'goal_lat': 36.379558, 'num_paths':2}
     #req = {'start_lon': 127.047569, 'start_lat': 37.503884, 'goal_lon': 127.0621, 'goal_lat': 37.5087, 'num_paths':2} # COEX
     res = query_to_server(SERVER_URL, req)
-    for i, r in enumerate(res): 
+    for i, r in enumerate(res):
         with open("route_{}.geojson".format(i),'w') as f:
             json.dump(r, f)
+    '''
 
     '''
     ##Example 2: Start -> Waypoint -> Goal
@@ -69,5 +80,32 @@ if __name__ == '__main__':
     with open("route.geojson",'w') as f:
         json.dump(merged, f)
     '''
+
+    ## Example 3: Delete edge => Restore edge
+    # Original route
+    req = {'start_lon': 127.367433, 'start_lat': 36.382423, 'goal_lon': 127.378857, 'goal_lat': 36.379444, 'num_paths':2} # ETRI
+    res = query_to_server(SERVER_URL, req)
+    with open("route_before.geojson",'w') as f:
+            json.dump(res[0], f)
+
+    # Delete edge
+    req = {'cmd': 'delete', 'edge_num': 559542564810231}
+    res = modify_edge(SERVER_URL, req)
+    print(res)
+
+    req = {'start_lon': 127.367433, 'start_lat': 36.382423, 'goal_lon': 127.378857, 'goal_lat': 36.379444, 'num_paths':2} # ETRI
+    res = query_to_server(SERVER_URL, req)
+    with open("route_edge_removed.geojson",'w') as f:
+            json.dump(res[0], f)
+
+    # Restore edge
+    req = {'cmd': 'restore', 'edge_num': 559542564810231}
+    res = modify_edge(SERVER_URL, req)
+    print(res)
+
+    req = {'start_lon': 127.367433, 'start_lat': 36.382423, 'goal_lon': 127.378857, 'goal_lat': 36.379444, 'num_paths':2} # ETRI
+    res = query_to_server(SERVER_URL, req)
+    with open("route_edge_restored.geojson",'w') as f:
+            json.dump(res[0], f)
 
 
