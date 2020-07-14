@@ -51,7 +51,7 @@
   - Delete edge (V0.4)
     - http://path.to.server/delete/edge_num
   - Restore edge (V0.4)
-    - http://path.to.server/delete/edge_num
+    - http://path.to.server/restore/edge_num
     
 ### Client 샘플 코드
 1. routing_client.py 수정
