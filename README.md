@@ -15,7 +15,8 @@
 ### 인터페이스
 1. tile 번호를 이용하는 방법: http://path.to.server/tile/tile_num_x/tile_num_y/
 2. 위경도 값을 이용하는 방법: http://path.to.server/wgs/latitude/longitude/radius
-3. Routing layer의 node id를 이용하는 방법: http://path.to.server/node/node_id/radius
+3. layer의 node id를 이용하는 방법 (V0.4): http://path.to.server/node/node_id/radius
+4. Routing layer의 node id를 이용하는 방법 (V0.4): http://path.to.server/routing_node/node_id/radius
 - 비고: 위치별 사용가능한 tile 번호
     - 봉은사 주변: tile_num_bong.txt
     - 에트리 주변: tile_num_etri.txt
