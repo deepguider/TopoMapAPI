@@ -1,4 +1,11 @@
 # Topological Map Server & Client
+### Updates V0.5
+- 부천지역 추가
+- Routing Layer 생성 방식 변경
+    - 보차혼용로 추가: Node type - 2, Edge type - 1
+    - 이상한 모양의 노드 연결 제거
+    - Edge length 계산시 버그 수정    
+
 ### 다운로드 및 압축 해제
   - 이메일에 제공된 링크로부터 Topological Map server docker 이미지 파일을 다운로드 받음 (topomapserver_package.tar)
  
@@ -18,8 +25,9 @@
 3. layer의 node id를 이용하는 방법 (V0.4): http://path.to.server/node/node_id/radius
 4. Routing layer의 node id를 이용하는 방법 (V0.4): http://path.to.server/routing_node/node_id/radius
 - 비고: 위치별 사용가능한 tile 번호
-    - 봉은사 주변: tile_num_bong.txt
-    - 에트리 주변: tile_num_etri.txt
+    - 봉은사 지역: tile_num_bong.txt
+    - 에트리 지역: tile_num_etri.txt
+    - 부천 지역: tile_num_bucheon.txt
      
 ### Client 샘플 코드
 1. topomap_client.py 수정
