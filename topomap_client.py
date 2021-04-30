@@ -47,24 +47,25 @@ if __name__ == '__main__':
         sys.exit()
 
     if args.req_type=="tile":
-        req = {'type': 'tile', 'tile_num_x': 55897, 'tile_num_y': 25393}
+        req = {'type': 'tile', 'tile_num_x': 55845, 'tile_num_y': 25390}
     elif args.req_type=="wgs":
-        req = {'type': 'wgs', 'latitude': 37.513366, 'longitude': 127.056132, 'radius': 500.0}
+        #req = {'type': 'wgs', 'latitude': 37.513366, 'longitude': 127.056132, 'radius': 500.0}
+        req = {'type': 'wgs', 'latitude': 37.515132, 'longitude': 126.770124, 'radius': 500.0}
         #req = {'type': 'wgs', 'latitude': 30, 'longitude': 120} # Invalid request (out of range)
     elif args.req_type=="node":
         if args.server_type=="routing":
-            req = {'type': 'node', 'node_id': 559512564700400, 'radius': 500.0} # For routing layers
+            req = {'type': 'node', 'node_id': 558452539001190, 'radius': 500.0} # For routing layers
         elif args.server_type=="streetview":
-            req = {'type': 'node', 'node_id': 33004500884, 'radius': 200.0} # For streetview layers
+            req = {'type': 'node', 'node_id': 19737201510, 'radius': 200.0} # For streetview layers
         elif args.server_type=="poi":
-            req = {'type': 'node', 'node_id': 929272521, 'radius': 300.0} # For Poi layers
+            req = {'type': 'node', 'node_id': 37644126, 'radius': 200.0} # For Poi layers
     elif args.req_type=="rnode":
-        req = {'type': 'routing_node', 'node_id': 559512564700400, 'radius': 500.0}
+        req = {'type': 'routing_node', 'node_id': 558452539001190, 'radius': 500.0}
     else:
         print("Not suppported request type")
         sys.exit()
 
     res = query_to_server(SERVER_URL, req)
     if res != None:
-        with open("{}_{}.geojson".format(args.server_type, args.req_type),'w') as f:
+        with open("results/{}_{}.geojson".format(args.server_type, args.req_type),'w') as f:
             geojson.dump(res, f)
