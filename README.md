@@ -1,10 +1,61 @@
 # Topological Map Server & Client
+### Updates V0.6
+- ETRI 지역 실내 추가
+- Routing 개선:
+    - 일부 routing node, edge 업데이트 (수작업)
+    - Shortest path 기준을 node 수가 아닌 이동 거리로 변경
+
 ### Updates V0.5
 - 부천지역 추가
 - Routing Layer 생성 방식 변경
     - 보차혼용로 추가: Node type - 2, Edge type - 1
     - 이상한 모양의 노드 연결 제거
     - Edge length 계산시 버그 수정    
+
+## 실내 지역 Topomap 생성 규칙
+### 지도/경로 체계
+- 실내/실외를 별도 구분된 맵이 아닌 단일 graph 지도로 처리 (floor 속성으로 실내외 구분)
+- 실내외에 걸친 path도 기존과 동일한 단일 path로 표현
+- 실내/실외 모두 POI 맵은 Routing Map과는 분리된 독립된 layer로 표현
+
+### Routing Map과 POI Map의 관계
+- Routing 노드와 POI 노드들의 위치는 실내외 모두 GPS 좌표로 표현
+- (기본적으로) Routing Map과 POI Map 노드들 사이의 직접적인 연결관계는 없음
+- (일부 지역에 한하여) 토폴로지 노드에 연결된 POI들을 부가정보로 제공할 수 있음: Routing layer의 노드 속성 정보 중 ["properties"]["pois"] 항목
+   
+### Routing Layer의 node 및 edge 의 type
+- Node:
+    - 인도: 0
+    - 분기점: 1
+    - 보차혼용로: 2
+    - 문 앞: 3
+    - 엘리베이터: 4
+    - 에스컬레이터: 5
+- Edge:
+    - 인도: 0
+    - 보차혼용로: 1
+    - 횡단보도: 2
+    - 엘리베이터 연결: 3
+    - 에스컬레이터 연결: 4
+    - 계단 연결: 5
+    - 실내/실외 연결: 6
+    
+### 수직 이동: 
+- 엘리베이터 노드는 각 엘리베이터마다 하나씩 배치됨 (층 마다 따로 두지 않음)
+- 각 노드는 각 층 마다 엘리베이터 앞의 문에 배치된 노드들과 연결되어 있음
+- 에트리의 경우에는 총 2개의 엘리베이터 노드가 존재하고 각 층에 있는 node들과 연결됨 
+- 아래 예시에서 엘리베이터 노드는 3개의 edge를 갖음 (1F, 3F, 7F 에 연결되는)
+![image](https://user-images.githubusercontent.com/51685843/124554816-55f93c00-de71-11eb-9062-dcea696a0102.png)
+
+### 실내/실외 연결
+- 출입구 (혹은 문) 노드는 type 3으로 지정됨
+- Outdoor 쪽 출입구는 type 3, floor 0의 값을 갖음
+- Indoor 쪽 출입구는 type 3, floor 1의 값을 갖음 (아래 예시 참고. 1층에서 연결 시)
+- 두 출입구를 이어주는 edge는 type 6, floor 1의 값을 갖음
+![image](https://user-images.githubusercontent.com/51685843/124554658-29ddbb00-de71-11eb-87da-ae76f63aaf9b.png)
+
+### Routing API 변경
+- Routing API 호출시 층 정보를 부가적으로 넣어주어야 함 (outdoor: 0)
 
 ### 다운로드 및 압축 해제
   - 이메일에 제공된 링크로부터 Topological Map server docker 이미지 파일을 다운로드 받음 (topomapserver_package.tar)
@@ -53,9 +104,9 @@
   docker-compose -f naver_api_docker_compose.yml up
   ```
   
-### 인터페이스
-  - 경로 생성:
-    - http://path.to.server/start_lat/start_lon/goal_lat/goal_lon/num_paths
+### 인터페이스 (updated @ V0.6)
+  - 경로 생성: floor는 층 정보 (outdoor의 경우 0) 
+    - http://path.to.server/start_lat/start_lon/goal_lat/goal_lon/num_paths/floor
   - Delete edge (V0.4)
     - http://path.to.server/delete/edge_num
   - Restore edge (V0.4)
