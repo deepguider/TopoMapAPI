@@ -1,7 +1,6 @@
 # Topological Map Server & Client
 ### Updates V0.6
 - ETRI 지역 실내 추가
-- ETRI 실내 지도 추가 (ETRI_indoor_map.zip)
 - Routing 개선:
     - 일부 routing node, edge 업데이트 (수작업)
     - Shortest path 기준을 node 수가 아닌 이동 거리로 변경
