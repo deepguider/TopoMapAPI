@@ -106,7 +106,7 @@
   
 ### 인터페이스 (updated @ V0.6)
   - 경로 생성: floor는 층 정보 (outdoor의 경우 0) 
-    - http://path.to.server/start_lat/start_lon/goal_lat/goal_lon/num_paths/floor
+    - http://path.to.server/start_lat/start_lon/floor/goal_lat/goal_lon/floor/num_paths
   - Delete edge (V0.4)
     - http://path.to.server/delete/edge_num
   - Restore edge (V0.4)
