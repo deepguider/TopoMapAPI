@@ -1,5 +1,5 @@
 # Topological Map Server & Client
-### Updates V0.6
+### Updates V0.7
 - ETRI 지역 Crosswalk 개선
 - edge 및 node type 오류 해결
 - node type 수정 (보차혼용로 노드 타입 제거)
