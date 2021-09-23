@@ -13,7 +13,7 @@
 ### Updates V0.5
 - 부천지역 추가
 - Routing Layer 생성 방식 변경
-    - 보차혼용로 추가: Node type - 2, Edge type - 1
+    - 보차혼용로 추가: Edge type - 1
     - 이상한 모양의 노드 연결 제거
     - Edge length 계산시 버그 수정    
 
