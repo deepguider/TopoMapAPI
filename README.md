@@ -1,5 +1,10 @@
 # Topological Map Server & Client
 ### Updates V0.6
+- ETRI 지역 Crosswalk 개선
+- edge 및 node type 오류 해결
+- node type 수정 (보차혼용로 노드 타입 제거)
+
+### Updates V0.6
 - ETRI 지역 실내 추가
 - Routing 개선:
     - 일부 routing node, edge 업데이트 (수작업)
@@ -27,10 +32,9 @@
 - Node:
     - 인도: 0
     - 분기점: 1
-    - 보차혼용로: 2
-    - 문 앞: 3
-    - 엘리베이터: 4
-    - 에스컬레이터: 5
+    - 문 앞: 2
+    - 엘리베이터: 3
+    - 에스컬레이터: 4
 - Edge:
     - 인도: 0
     - 보차혼용로: 1
