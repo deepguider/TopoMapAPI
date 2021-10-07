@@ -1,4 +1,9 @@
 # Topological Map Server & Client
+### Updates V0.8
+- 통합 시연을 위한 봉은사지역 지도 변경
+- 데모 루트 Routing layer 개선
+- 데모 루트 POI 추가
+
 ### Updates V0.7
 - ETRI 지역 Crosswalk 개선
 - edge 및 node type 오류 해결
